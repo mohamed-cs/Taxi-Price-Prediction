@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Uber Price Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+
+    <style>
+      .card-text{
+        font-size:15px;
+      }
+
+      .card-textt{
+        font-size:20px;
+        line-height: 52px;
+    
+      }
+
+      .col-auto{
+        margin-right: 40px;
+        margin-top: 65px;
+      }
+
+
+      .buttons_home{
+        margin-top: 20px;
+        margin-left: 50px;
+      }
+      #left_button{
+        margin-right:40px;
+
+      }
+
+   
+
+      
+    </style>
+
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-lg bg-black" >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/" style="color:white; font-size: 30px; margin-left: 20px; margin-right: 40px;">Uber</a>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" style="color:white;"href='/'>Home</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" style="color:white;" href="/about">About</a>
+              </li>
+            
+              <li class="nav-item">
+                <a class="nav-link" style="color:white;" href="https://help.uber.com/?uclick_id=37a065e5-d446-4252-9d6c-b027280b4a23">Help</a>
+              </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" style="color:white;"href="#">Home</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" style="color:white;" href="#">Link</a>
+              </li>
+            
+              <li class="nav-item">
+                <a class="nav-link disabled" style="color:white;">Disabled</a>
+              </li>
+            </ul>
+            
+          </div>
+
+          <a href="#" style="color:white;"class="btn btn-primary">BUTTON</a>
+        </div>
+      </nav>
+   
+      <div class="card border-0">
+        <div class="row no-gutters">
+            <div class="col" style=" margin-top: 200px;">
+                <div class="card-block px-5">
+                    <h1 class="card-title" style="font-size: 60px;">Boston: Get a ride.</h1>
+                    <h1 class="card-title"style="font-size: 60px;">Travel. Explore.</h1>
+                    <p class="card-textt" style="font-size: 20x;">Planning a trip is easy with Uber. Compare ways to get around, and see what’s happening near you.
+Headed somewhere else? See all cities where Uber is available.</p>
+                </div>
+
+          <div class="buttons_home">
+           <a href="#ridess"> <button type="button" id="left_button" class="btn btn-dark btn-lg" style="color:white; background-color:black; padding: 10px;">Explore Ride</button></a>
+            <a href="#price"><button type="button" id="right_button" class="btn btn-secondary btn-lg" style="color: black; background-color: #EEEEEE; padding: 10px;" >Get A Price Estimate</button> </a> 
+          </div>
+          
+            </div>
+            <div class="col-auto">
+              <img src= "{{ url_for('static', filename='assests/boston_map.jpg' )}}" class="img-fluid" alt="">
+          </div>
+
+        </div>
+
+
+
+
+        <div class="card border-0" style="margin-top: 100px;">
+          <div class="row no-gutters">
+              <div class="col" style=" margin-top: 200px;">
+                  <div class="card-block px-5">
+                      <h1 class="card-title" style="font-size: 50px;">Get a ride Price Estimate </h1>
+                      <p class="card-textt" style="font-size: 20x;">Complete your plans today by reserving a ride with Uber in Boston. Request a ride up to 30 days in advance, at any time and on any day of the year.</p>
+
+                      <div class="card-body" id="price" >
+                        <form method="post" accept-charset="utf-8" action='predict'>
+    
+    
+                            <div class="col-18 form-group" style="text-align: left; margin-bottom: 10px; width: 500px;">
+                                <label style="margin-bottom:5px ;"><h3>Select Your Source : </h3></label>
+                                <select class="selectpicker form-control"   id="source" name="source"  required>
+                                    <option value="">Enter your Source</option>
+                                    {% for source in sources %}
+                                    <option value="{{source}}">{{source}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+    
+                            <div class="col-18 form-group" style="text-align: left; margin-bottom: 10px;  width: 500px;">
+                                <label style="margin-bottom :5px ;"><h4>Select Your Destination : </h4></label>
+                                <select class="selectpicker form-control" id="dist" name="dist" required>
+                                    <option value="">Enter your Destination</option>
+                                    {% for source in sources %}
+                                    <option value="{{source}}">{{source}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <div class="button_price" style="margin-left:2px;">            
+                              <button id="right_button" type="submit" class="btn btn-secondary btn-lg" style="color: black; background-color: #EEEEEE; padding: 10px;">Get A Price Estimate</button>  
+                            </div>
+
+                        </form>
+                    </div>
+
+                  </div>
+  
+            
+            
+              </div>
+              <div class="col-auto">
+                <img src="{{ url_for('static', filename='assests/price_prediction_png.png' )}}" class="img-fluid" alt="">
+            </div>
+  
+          </div>
+
+
+      
+      <div>
+        <div style="margin-top: 200px; margin-left: 45px; font-size: 50px;"> <p>Boston: choose a ride</p></div>
+        
+        
+        <div class="row row-cols-2 row-cols-md-4 g-4" id="ridess" style="margin-left:50px;">
+
+          <a class="btn btn-outline-light btn-floating m-4" href="#" role="button">
+          <div class="col">
+            <div class="card" style="width: 300px;">
+              <img src="{{ url_for('static', filename='assests/Taxi_Yellow.png' )}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Taxi</h5>
+                <p class="card-text">Local taxi-cabs at the tap of a button.</p>
+                <p class="card-text">{{taxi_price}}</p>
+              </div>
+            </div>
+          </div>
+          </a>
+
+          <a class="btn btn-outline-light btn-floating m-4" href="#" role="button">
+          <div class="col">
+            <div class="card"  style="width: 300px;">
+              <img src="{{ url_for('static', filename='assests/shared.png' )}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Uber Pool</h5>
+                <p class="card-text">Shared Rides are Back.</p>
+                <p class="card-text">{{uberpool_price}}</p>
+              </div>
+            </div>
+          </div>
+
+        </a>
+
+        <a class="btn btn-outline-light btn-floating m-4" href="#" role="button">
+          <div class="col">
+            <div class="card" style="width: 300px;">
+              <img src="{{ url_for('static', filename='assests/uberx.png' )}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">UberX</h5>
+                <p class="card-text">Affordable rides, all to yourself.</p>
+                <p class="card-text">{{uberx_price}}</p>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a class="btn btn-outline-light btn-floating m-4" href="#" role="button">
+          <div class="col">
+            <div class="card" style="width: 300px;">
+              <img src="{{ url_for('static', filename='assests/UberXL.png' )}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">UberXL</h5>
+                <p class="card-text">Affordable rides for groups up to 6 .</p>
+                <p class="card-text">{{uberxl_price}}</p>
+              </div>
+            </div>
+          </div>
+        
+        </a>
+
+
+        <a class="btn btn-outline-light btn-floating m-4" href="#" role="button">
+          <div class="col">
+            <div class="card" style="width: 300px;">
+              <img src="{{ url_for('static', filename='assests/Black.png' )}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Uber Black</h5>
+                <p class="card-text">Luxury rides with professional drivers.</p>
+                <p class="card-text">{{black_price}}</p>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a class="btn btn-outline-light btn-floating m-4" href="#" role="button">
+          <div class="col">
+            <div class="card" style="width: 300px;">
+              <img src="{{ url_for('static', filename='assests/BlackSUV.png' )}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Uber BlackSUV</h5>
+                <p class="card-text">Luxury rides for 6 with professional drivers</p>
+                <p class="card-text">{{black_suv_price}}</p>
+              </div>
+            </div>
+          </div>
+
+        </a>
+          
+          
+        </div>
+
+        <div class="card border-0" style="margin-top: 50px;">
+          <div class="row no-gutters">
+              <div class="col" style=" margin-top: 200px;">
+                  <div class="card-block px-5">
+                      <h1 class="card-title" style="font-size: 40px;">The same app, wherever</h1>
+                      <h1 class="card-title"style="font-size: 40px;">you go.</h1>
+                      <p class="card-textt" style="font-size: 20x;">Access the same features you enjoy at home while you’re traveling, including safety features such as 24/7 support, GPS tracking, and emergency assistance.</p>
+                  </div>
+
+            
+              </div>
+              <div class="col-auto">
+                <img src= "{{ url_for('static', filename='assests/city-same-app.png' )}}" class="img-fluid" alt="">
+
+
+            </div> 
+              
+          </div>
+        
+      </div>
+
+      </div>
+
+      <div>
+        
+        <div class="card-block px-5" style="margin-top:100px ;">
+          <h1 class="card-title" style="font-size: 40px;">How we partner with cities</h1>
+          <p class="card-textt" style="font-size: 20x; width: 700px;">Our relationship with you might start with a tap, but with cities it runs deeper. Our goal is to serve as a model for others to improve quality of life and build smarter, more efficient cities in the future.</p>
+      </div>
+
+      <a class="btn btn-outline-light btn-floating m-4" href="#" role="button">
+      <div>
+        <div style="margin-left:50px;margin-top: 50px; display: inline-block;">
+        <img src= "{{ url_for('static', filename='assests/safty.svg' )}}" class="img-fluid" alt=""/> 
+        <h4 class="card-title">Road safety</h4>
+        <p style="font-size: 17px; width: 400px;">Helping prevent impaired driving by encouraging people to make safer choices can make roads safer for everyone.</p>
+      </div>
+
+    </a>
+
+    <a class="btn btn-outline-light btn-floating m-4" href="#" role="button">
+      <div style="margin-left:50px;margin-top: 50px;display: inline-block;">
+        <img src= "{{ url_for('static', filename='assests/support.svg' )}}" class="img-fluid" alt=""/> 
+        <h4 class="card-title">Supporting cities</h4>
+        <p style="font-size: 17px; width: 400px;">From helping to reduce carbon emissions to strengthening public transit, our partnerships with local governments create better cities.</p>
+      </div>
+    </a>
+      <div style=" background-color: #EEEEEE;">
+      <div class="card-block px-5" style="margin-top: 100px; height: 400px; padding-top: 75px;">
+        <p >Uber does not tolerate the use of alcohol or drugs by drivers using the Uber app. If you believe your driver may be under the influence of drugs or alcohol, please have the driver end the trip immediately.</p>
+        <p>Commercial vehicles may be subject to additional state government taxes, which would be over and above the toll.</p>
+        <p>After the driver has ended the trip, please report any feedback when rating your trip in the Uber app, emailing customercomplaints@uber.com, visiting help.uber.com, or calling 800-664-1378.</p>
+        <p>All tolls are charged at commercial rates regardless of the rate paid; tolls go directly to driver-partners and are not retained by Uber. Toll amounts charged could be greater than the amount paid.</p>
+        <p>Riders pay an airport facility charge of $3.25 on all trips originating from Logan Airport. Fare structures differ on Cape Cod, Martha’s Vineyard, and Nantucket. For more information on Uber Taxi pricing, see Boston taxi rates.</p>
+
+      </div>
+      
+    </div>
+
+    </div>
+  </div>
+    
+<footer class="bg-dark text-center text-white">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+        ><i class="fab fa-facebook-f"> <img  width='40px' src= "{{ url_for('static', filename='assests/facebook_icon.png' )}}" class="img-fluid" alt=""/> </i
+      ></a>
+
+      <!-- Twitter -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+        ><i class="fab fa-twitter"><img width='40px' src= "{{ url_for('static', filename='assests/twitter_icon.png' )}}" class="img-fluid" alt=""/></i
+      ></a>
+
+      <!-- Google -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+        ><i class="fab fa-google"><img width='40px' src= "{{ url_for('static', filename='assests/google_icon.png' )}}" class="img-fluid" alt=""/></i
+      ></a>
+
+      <!-- Instagram -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+        ><i class="fab fa-instagram"><img width='40px' src= "{{ url_for('static', filename='assests/instgram_icon.png' )}}" class="img-fluid" alt=""/></i
+      ></a>
+
+      <!-- Linkedin -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+        ><i class="fab fa-linkedin-in"><img width='40px' src= "{{ url_for('static', filename='assests/linkedin_icon.png' )}}" class="img-fluid" alt=""/></i
+      ></a>
+
+      <!-- Github -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+        ><i class="fab fa-github"><img width='40px' src= "{{ url_for('static', filename='assests/github_icon.png' )}}" class="img-fluid" alt=""/></i
+      ></a>
+    </section>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2020 Copyright:
+    <a class="text-white" href="#">Mohamed Magdy</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+
+  </body>
+</html>
